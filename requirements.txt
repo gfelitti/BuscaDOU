@@ -1,0 +1,9 @@
+bs4
+datetime
+flask
+gspread
+gunicorn
+oauth2client
+python-dateutil
+pytz
+requests
