@@ -29,7 +29,16 @@ def raspador_termo_dou(url):
     raspagem_dou = BeautifulSoup((requests.get(url)).content)
     time.sleep(3)
 
+
+
     # Descobrir o número de página que tem aquele termo no DOU
+    # Ver quantas páginas tem
+
+    # Ver como a URL muda quando passa para a página seguinte
+
+    # Começar com a url original e ir no looping adicionando as páginas
+
+
 
     # Encontre o script com o objeto JSON e extrai o conteúdo do script (.string)
     decreto_string = raspagem_dou.find('script', {'id':'_br_com_seatecnologia_in_buscadou_BuscaDouPortlet_params'}).string
