@@ -29,6 +29,8 @@ def raspador_termo_dou(url):
     raspagem_dou = BeautifulSoup((requests.get(url)).content)
     time.sleep(3)
 
+    # Descobrir o número de página que tem aquele termo no DOU
+
     # Encontre o script com o objeto JSON e extrai o conteúdo do script (.string)
     decreto_string = raspagem_dou.find('script', {'id':'_br_com_seatecnologia_in_buscadou_BuscaDouPortlet_params'}).string
 
@@ -74,5 +76,6 @@ def raspador_termo_dou(url):
         raspagem.append([secao, organizacao_principal, data, mes, ano, referencia, titulo, emenda, url_decreto, ', '.join(lista_assinaturas)])
 
     df = pd.DataFrame(raspagem, columns=['secao', 'organizacao_principal', 'data', 'mes', 'ano', 'referencia', 'titulo', 'emenda', 'url_decreto', 'assinaturas'])
-
-    return df
+    
+    # Baixar um arquivo com as aparições do termo no DOU
+    df.to_csv('df_termo')
