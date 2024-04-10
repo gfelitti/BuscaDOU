@@ -7,6 +7,10 @@ import time
 from bs4 import BeautifulSoup
 from datetime import datetime
 
+# Objetivo
+# Criar um scrapper que raspe todas as vezes que uma palavra x apareceu no dou
+
+
 # adicionar no futuro
 # 1. limite de data para a coleta do raspador pra não ficar num looping eterno / coletar por ano
 # 2. fazer try/except para ConnectionError
