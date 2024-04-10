@@ -12,11 +12,14 @@ from datetime import datetime
 # 2. fazer try/except para ConnectionError
 # 3. fazer random de time.sleep
 # 4. fazer looping para todas as páginas
+# 5. identificar parte do texto que diz sobre o termo
 
 
-raspagem = []
+
 
 def raspador_termo_dou(url):
+
+    raspagem = []
 
     # raspar a url usando requests e BeautifulSoup
     raspagem_dou = BeautifulSoup((requests.get(url)).content)
@@ -45,7 +48,7 @@ def raspador_termo_dou(url):
         # Entrar na URL do decreto para saber o que tem nele
         # raspar a url usando requests e BeautifulSoup
         raspagem_decreto = BeautifulSoup((requests.get(url_decreto)).content)
-        time.sleep(3)
+        time.sleep(2)
 
         # coletar assinaturas
         lista_assinaturas = []
@@ -66,6 +69,6 @@ def raspador_termo_dou(url):
         # salvar o conteúdo na lista raspagem para depois converterem df
         raspagem.append([secao, organizacao_principal, data, mes, ano, referencia, titulo, emenda, url_decreto, ', '.join(lista_assinaturas)])
 
-    df = pd.DataFrame(raspagem, columns=[''])
+    df = pd.DataFrame(raspagem, columns=['secao', 'organizacao_principal', 'data', 'mes', 'ano', 'referencia', 'titulo', 'emenda', 'url_decreto', 'assinaturas'])
 
     return df
