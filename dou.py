@@ -12,7 +12,7 @@ warnings.filterwarnings("ignore")
 parser = argparse.ArgumentParser( description= 'DOU Online')
 
 # argumentos posicionais / obrigatórios
-parser.add_argument('-t', 'termo', type ='str', help='Escreva aqui a palavra que você busca no DOU')
+parser.add_argument('-t', '--termo', type =str, help='Escreva aqui a palavra que você busca no DOU')
 # parser.add_argument('data', type='str', help='Digite aqui a data do DOU que você quer raspar. Formato: aaaa-mm-dd')
 
 # armazenar os resultados do conteúdo dado pelo usuário + tratar o conteudo
