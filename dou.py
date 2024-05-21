@@ -22,9 +22,9 @@ args = parser.parse_args()
 # para garantir que o código aqui só seja executado quando o script for executado diretamente
 if __name__ == '__main__': 
   #cadernos=['do1','do2','do3']
+  cadernos=['do1']
   termo_usuario = args.termo
 
-  cadernos=['do1']
   data=datetime.date.today()
   data_formatada=data.strftime('%d-%m-%Y')
   url=f'http://www.in.gov.br/leiturajornal?data={data_formatada}&secao='
@@ -47,9 +47,10 @@ if __name__ == '__main__':
   df=pd.DataFrame(dou_final, columns=['Seção', 'Organização Principal', 'Data', 'Referência', 'Título', 'Emenda', 'URL', 'Assinaturas'])
   
   # filtro do dou com o termo enviado pelo usuário
-  df_query = df.query('Emenda == @termo_usuario or Título == @termo_usuario')
+  df_query = df[df['Emenda'].str.contains(termo_usuario, case=False, na=False) | df['Título'].str.contains(termo_usuario, case=False, na=False)]
 
 
-  filepath=os.path.join(os.getcwd(), f'DOU_completo_{data_formatada}.csv')
+
+  filepath=os.path.join(os.getcwd(), f'DOU_completo_{data_formatada}-4.csv')
   df_query.to_csv(filepath)
 
