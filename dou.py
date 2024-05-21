@@ -23,7 +23,8 @@ args = parser.parse_args()
 if __name__ == '__main__': 
   #cadernos=['do1','do2','do3']
   cadernos=['do1']
-  termo_usuario = args.termo
+  termo_usuario = (args.termo).lower()
+  print(termo_usuario)
 
   data=datetime.date.today()
   data_formatada=data.strftime('%d-%m-%Y')
@@ -45,6 +46,10 @@ if __name__ == '__main__':
       dou_final.append(item)   # precisamos lidar com palavras com letras maiusculas e minusculas
       
   df=pd.DataFrame(dou_final, columns=['Seção', 'Organização Principal', 'Data', 'Referência', 'Título', 'Emenda', 'URL', 'Assinaturas'])
+
+  # Convertendo apenas as colunas 'Emenda' e 'Título' para minúsculas
+  df['Emenda'] = df['Emenda'].str.lower()
+  df['Título'] = df['Título'].str.lower()
   
   # filtro do dou com o termo enviado pelo usuário
   # case=False faz a busca sem considerar maiúsculas e minúsculas
