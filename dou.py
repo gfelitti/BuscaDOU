@@ -21,7 +21,10 @@ args = parser.parse_args()
 
 # para garantir que o código aqui só seja executado quando o script for executado diretamente
 if __name__ == '__main__': 
-  cadernos=['do1','do2','do3']
+  #cadernos=['do1','do2','do3']
+  termo_usuario = args.termo
+
+  cadernos=['do1']
   data=datetime.date.today()
   data_formatada=data.strftime('%d-%m-%Y')
   url=f'http://www.in.gov.br/leiturajornal?data={data_formatada}&secao='
@@ -39,12 +42,14 @@ if __name__ == '__main__':
   for json_caderno in integra:
     raspagem = raspar_caderno(json_caderno)
     for item in raspagem:
-      dou_final.append(item)
+      dou_final.append(item)   # precisamos lidar com palavras com letras maiusculas e minusculas
       
   df=pd.DataFrame(dou_final, columns=['Seção', 'Organização Principal', 'Data', 'Referência', 'Título', 'Emenda', 'URL', 'Assinaturas'])
-
+  
   # filtro do dou com o termo enviado pelo usuário
+  df_query = df.query('Emenda == @termo_usuario or Título == @termo_usuario')
+
 
   filepath=os.path.join(os.getcwd(), f'DOU_completo_{data_formatada}.csv')
-  df.to_csv(filepath)
+  df_query.to_csv(filepath)
 
