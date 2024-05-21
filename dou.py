@@ -47,6 +47,8 @@ if __name__ == '__main__':
   df=pd.DataFrame(dou_final, columns=['Seção', 'Organização Principal', 'Data', 'Referência', 'Título', 'Emenda', 'URL', 'Assinaturas'])
   
   # filtro do dou com o termo enviado pelo usuário
+  # case=False faz a busca sem considerar maiúsculas e minúsculas
+  # parâmetro na=False trata valores NA como não correspondentes
   df_query = df[df['Emenda'].str.contains(termo_usuario, case=False, na=False) | df['Título'].str.contains(termo_usuario, case=False, na=False)]
 
 
