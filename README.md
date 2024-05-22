@@ -1,5 +1,7 @@
 ## Guia de Uso para a Raspagem do DOU
 
+![Python 3.9](https://img.shields.io/badge/python-%3E%3D3.9-blue)
+
 Este guia fornece instruções detalhadas sobre como instalar as dependências necessárias e usar o script para raspar informações do Diário Oficial da União (DOU) com base em um termo de busca e uma data específica.
 
 ### Pré-requisitos
