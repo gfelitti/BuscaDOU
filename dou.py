@@ -1,6 +1,7 @@
 import argparse
 import json
 import datetime
+from datetime import timedelta
 import requests
 import pandas as pd
 from utils import raspar_caderno
@@ -21,13 +22,14 @@ args = parser.parse_args()
 
 # para garantir que o código aqui só seja executado quando o script for executado diretamente
 if __name__ == '__main__': 
-  #cadernos=['do1','do2','do3']
-  cadernos=['do1']
+  cadernos=['do1','do2','do3']
   termo_usuario = (args.termo).lower()
   print(termo_usuario)
 
   data=datetime.date.today()
   data_formatada=data.strftime('%d-%m-%Y')
+
+
   url=f'http://www.in.gov.br/leiturajornal?data={data_formatada}&secao='
   integra=[]
 
@@ -57,7 +59,6 @@ if __name__ == '__main__':
   df_query = df[df['Emenda'].str.contains(termo_usuario, case=False, na=False) | df['Título'].str.contains(termo_usuario, case=False, na=False)]
 
 
-
-  filepath=os.path.join(os.getcwd(), f'DOU_completo_{data_formatada}-4.csv')
+  filepath=os.path.join(os.getcwd(), f'DOU_completo_{data_formatada}-1.csv')
   df_query.to_csv(filepath)
 
