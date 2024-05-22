@@ -2,6 +2,41 @@ from tqdm import tqdm
 import time
 from bs4 import BeautifulSoup
 import requests
+import pandas as pd
+import json
+import logging
+import randomheaders
+
+def filtrar_dados(dou_final, termo):
+    df = pd.DataFrame(dou_final, columns=['Seção', 'Organização Principal', 'Data', 'Referência', 'Título', 'Emenda', 'URL', 'Assinaturas'])
+    df[['Emenda', 'Título']] = df[['Emenda', 'Título']].applymap(str.lower)
+    df_filtrado = df[df['Emenda'].str.contains(termo, case=False, na=False) | df['Título'].str.contains(termo, case=False, na=False)]
+    return df_filtrado
+
+def obter_conteudo_dou(data_formatada, cadernos):
+    url_base = f'http://www.in.gov.br/leiturajornal?data={data_formatada}&secao='
+
+    conteudos = []
+    for caderno in cadernos:
+        print(url_base+ caderno)
+        try:
+            response = requests.get(url_base + caderno, 
+                                    headers=randomheaders.LoadHeader())
+            response.raise_for_status()
+            soup = BeautifulSoup(response.text, 'html.parser')
+            script = soup.find("script", {"id": "params"})
+            if script:
+                conteudo = json.loads(script.text)
+                if 'jsonArray' in conteudo and conteudo['jsonArray']:
+                    conteudos.append(conteudo)
+                else:
+                    logging.warning(f'Nenhuma publicação encontrada no caderno {caderno} para a data {data_formatada}. Conteúdo jsonArray está vazio.')
+            else:
+                logging.error(f'Não foi possível encontrar o script JSON para {caderno}. Verifique se o ID está correto e a página contém dados.')
+        except requests.RequestException as e:
+            logging.error(f'Erro ao buscar dados para {caderno}: {e}')
+    return conteudos
+
 
 def raspar_caderno(json_caderno):
     raspagem = []
