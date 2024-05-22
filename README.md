@@ -38,13 +38,13 @@ O script é acionado via linha de comando. Aqui estão os detalhes sobre como ex
 Abra o terminal ou prompt de comando e navegue até o diretório onde o script está localizado. Execute o script com os parâmetros necessários, por exemplo:
 
 ```bash
-python dou.py --termo "licitação" --data "21-05-2024"
+python dou.py --termo licitação --data 21-05-2024
 ```
 
 Se você quiser usar a data atual e apenas especificar um termo, você pode omitir o parâmetro `--data`:
 
 ```bash
-python dou.py --termo "contrato"
+python dou.py --termo contrato
 ```
 
 ### Resultados
