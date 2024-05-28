@@ -23,26 +23,31 @@ if __name__ == '__main__':
     termo_usuario = args.termo.lower()
     data_usuario = args.data
     cadernos = ['do1', 'do2']
-    
-    logging.info(f"Pegando os cadernos {', '.join(cadernos)} do dia {data_usuario} do DOU")
-    conteudos = obter_conteudo_dou(data_usuario, cadernos)
-    
-    dou_final = []
-    for conteudo in conteudos:
-        dou_final.extend(raspar_caderno(conteudo))
-    
-    if dou_final:
+    filepath_bruto = os.path.join(os.getcwd(), f'DOU_bruto_{data_usuario}.csv')
+
+    # Verifica se o arquivo DOU bruto já existe
+    if os.path.exists(filepath_bruto):
+        logging.info(f"Arquivo DOU bruto já baixado: {filepath_bruto}")
+        df_bruto = pd.read_csv(filepath_bruto)
+        dou_final = df_bruto.to_dict(orient='records')
+    else:
+        logging.info(f"Pegando os cadernos {', '.join(cadernos)} do dia {data_usuario} do DOU")
+        conteudos = obter_conteudo_dou(data_usuario, cadernos)
+        dou_final = []
+        for conteudo in conteudos:
+            dou_final.extend(raspar_caderno(conteudo))
         df_bruto = pd.DataFrame(dou_final, columns=['Seção', 'Organização Principal', 'Data', 'Referência', 'Título', 'Emenda', 'URL', 'Assinaturas'])
-        filepath_bruto = os.path.join(os.getcwd(), f'DOU_bruto_{data_usuario}.csv')
         df_bruto.to_csv(filepath_bruto)
         logging.info(f"Arquivo bruto salvo em {filepath_bruto}")
 
+    # Filtragem de dados
+    if dou_final:
         df_filtrado = filtrar_dados(dou_final, termo_usuario)
         if not df_filtrado.empty:
             filepath_filtrado = os.path.join(os.getcwd(), f'DOU_filtrado_{data_usuario}.csv')
             df_filtrado.to_csv(filepath_filtrado)
             logging.info(f"Arquivo filtrado salvo em {filepath_filtrado}")
         else:
-            logging.warning(f'Nenhum resultado foi encontrado para o termo {termo_usuario}. Nenhum arquivo CSV filtrado foi criado.')
+            logging.warning('Nenhum resultado foi encontrado para o termo de busca especificado. Nenhum arquivo CSV filtrado foi criado.')
     else:
-        logging.warning(f'Não foram encontrados registros no DOU para data {data_usuario}.')
+        logging.warning('Não foram encontrados registros no DOU para a data especificada.')

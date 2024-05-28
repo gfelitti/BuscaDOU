@@ -18,7 +18,6 @@ def obter_conteudo_dou(data_formatada, cadernos):
 
     conteudos = []
     for caderno in cadernos:
-        print(url_base+ caderno)
         try:
             response = requests.get(url_base + caderno, 
                                     headers=randomheaders.LoadHeader())
