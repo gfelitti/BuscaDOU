@@ -9,7 +9,7 @@ import randomheaders
 
 def filtrar_dados(dou_final, termo):
     df = pd.DataFrame(dou_final, columns=['Seção', 'Organização Principal', 'Data', 'Referência', 'Título', 'Emenda', 'URL', 'Assinaturas'])
-    df[['Emenda', 'Título']] = df[['Emenda', 'Título']].applymap(str.lower)
+    df[['Emenda', 'Título']] = df[['Emenda', 'Título']].map(str.lower)
     df_filtrado = df[df['Emenda'].str.contains(termo, case=False, na=False) | df['Título'].str.contains(termo, case=False, na=False)]
     return df_filtrado
 

@@ -44,7 +44,7 @@ if __name__ == '__main__':
     if dou_final:
         df_filtrado = filtrar_dados(dou_final, termo_usuario)
         if not df_filtrado.empty:
-            filepath_filtrado = os.path.join(os.getcwd(), f'DOU_filtrado_{data_usuario}.csv')
+            filepath_filtrado = os.path.join(os.getcwd(), f'DOU_filtrado_{termo_usuario.replace(" ","")}_{data_usuario}.csv')
             df_filtrado.to_csv(filepath_filtrado)
             logging.info(f"Arquivo filtrado salvo em {filepath_filtrado}")
         else:
