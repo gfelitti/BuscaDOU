@@ -1,7 +1,7 @@
 ## Guia de Uso para a Raspagem do DOU
 
 ![Python 3.9](https://img.shields.io/badge/python-%3E%3D3.9-blue)
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)]([https://colab.research.google.com/github/seu-usuario/seu-repositorio/blob/main/seu-script.ipynb](https://colab.research.google.com/drive/15mF8bDk223k_Rn3o-eQMMMWEvNlGsgqC?usp=sharing#scrollTo=UhvOUzCUb8Jf))
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/15mF8bDk223k_Rn3o-eQMMMWEvNlGsgqC?usp=sharing#scrollTo=UhvOUzCUb8Jf)
 
 Este guia fornece instruções detalhadas sobre como instalar as dependências necessárias e usar o script para raspar informações do Diário Oficial da União (DOU) com base em um termo de busca e uma data específica.
 
