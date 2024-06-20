@@ -4,6 +4,7 @@
 
 Este guia fornece instruções detalhadas sobre como instalar as dependências necessárias e usar o script para raspar informações do Diário Oficial da União (DOU) com base em um termo de busca e uma data específica.
 
+Não sabe usar o Terminal? Sem problema: [use o código no Colab](https://colab.research.google.com/drive/15mF8bDk223k_Rn3o-eQMMMWEvNlGsgqC?usp=sharing#scrollTo=UhvOUzCUb8Jf).
 ### Pré-requisitos
 
 Antes de começar, certifique-se de que você tem o Python +3.9 instalado em seu sistema. Você também precisará de `pip` para instalar as bibliotecas necessárias.
