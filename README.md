@@ -1,4 +1,4 @@
-## Guia de Uso para a Raspagem do DOU
+## Guia de Uso do BuscaDOU
 
 ![Python 3.9](https://img.shields.io/badge/python-%3E%3D3.9-blue)
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/15mF8bDk223k_Rn3o-eQMMMWEvNlGsgqC?usp=sharing#scrollTo=UhvOUzCUb8Jf)
